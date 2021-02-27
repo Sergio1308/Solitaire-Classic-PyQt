@@ -81,10 +81,18 @@ class Deck:
     def __getitem__(self, item):
         """A special method called when the value is accessed by index or key.
 
-        :param item: index.
+        :param item: value index.
         :return: name of the card from the deck.
         """
         return self.cards_list[item]
+
+    def __setitem__(self, key, value):
+        """A special method that is called in case of assigning a value by index or key.
+
+        :param key: value index.
+        :param value: new indexed value.
+        """
+        self.cards_list[key] = value
 
     def build_cards(self):
         """This is a method that builds the deck."""
@@ -153,4 +161,3 @@ if __name__ == "__main__":
         print(card)
     c = d.drawCard()
     print('\nWe have:', c)
-
