@@ -76,6 +76,7 @@ class Deck:
         self.card_suits = ["Clubs", "Hearts", "Spades", "Diamonds"]
 
         self.cards_list = []
+        self.i = 0  # current index for __iter__
         self.build_cards()
 
     def __getitem__(self, item):
@@ -93,6 +94,30 @@ class Deck:
         :param value: new indexed value.
         """
         self.cards_list[key] = value
+
+    def __delitem__(self, key):
+        """A special method called when an element is deleted by index, or key.
+
+        :param key: value index.
+        """
+        del self.cards_list[key]
+
+    def __iter__(self):
+        """A method that defines the iterative protocol."""
+        return self
+
+    def __next__(self):
+        """A method that is called on each iterations.
+
+        :return: the current value or throws a StopIteration exception that signals the end of iterations.
+        """
+        if self.i >= len(self.cards_list):
+            self.i = 0
+            raise StopIteration
+        else:
+            current_value = self.cards_list[self.i]
+            self.i += 1
+            return current_value
 
     def build_cards(self):
         """This is a method that builds the deck."""
