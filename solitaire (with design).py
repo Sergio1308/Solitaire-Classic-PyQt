@@ -1,7 +1,5 @@
-"""
-Студент Гайдук Сергей КН-19-1
-Solitaire Classic
-"""
+"""Solitaire Classic."""
+
 from PyQt5 import QtGui, QtWidgets, uic
 import random
 import os
@@ -22,21 +20,21 @@ class QLabelExample(QtWidgets.QMainWindow):
 
         self.ui = uic.loadUi('Table.ui')
 
-        self.ui.pushButton.clicked.connect(self.load_stack)
-        self.ui.pushButton_2.clicked.connect(self.last_card)
+        self.ui.pushButton.clicked.connect(self.next_card)
+        self.ui.pushButton_2.clicked.connect(self.previous_card)
         self.ui.pushButton_3.clicked.connect(self.shuffle_deck)
 
         self.ui.label.setPixmap(QtGui.QPixmap(os.path.join('cards', '1C')))
 
         self.ui.show()
 
-    def load_stack(self):
+    def next_card(self):
         for i in range(1):
             self.stack.append(self.stack.pop(0))
             pixmap = QtGui.QPixmap(os.path.join('cards', '%s%s.png' % (self.stack[0][0], self.stack[0][1])))
             self.ui.label.setPixmap(pixmap)
 
-    def last_card(self):
+    def previous_card(self):
         for i in range(1):
             self.stack.insert(0, self.stack.pop())
             pixmap = QtGui.QPixmap(os.path.join('cards', '%s%s.png' % (self.stack[0][0], self.stack[0][1])))
@@ -48,16 +46,6 @@ class QLabelExample(QtWidgets.QMainWindow):
             self.stack[i], self.stack[random_nmb] = self.stack[random_nmb], self.stack[i]
             pixmap = QtGui.QPixmap(os.path.join('cards', '%s%s.png' % (self.stack[0][0], self.stack[0][1])))
             self.ui.label.setPixmap(pixmap)
-        print('Debug log: shuffled:', len(self.stack), self.stack)
-
-    def label_image(self):
-        pixmap = QtGui.QPixmap('')
-        self.ui.label.setPixmap(pixmap)
-
-    def label_animation(self):
-        movie = QtGui.QMovie('')
-        self.ui.label.setMovie(movie)
-        movie.start()
 
 
 if __name__ == "__main__":
